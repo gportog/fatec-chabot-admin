@@ -5,7 +5,7 @@ const errorMessages = require('../../lib/errorMessages');
 module.exports = (req, res, next) => {
     const dbInstance = new DBClient('chatbot_feedback');
     dbInstance.getById(req.params.id)
-        .then((resp) => res.status(httpStatus.OK).json(resp))
+        .then((resp) => { return res.status(httpStatus.OK).json(resp) })
         .catch((err) => {
             if (err.message === 'missing') {
                 err = new Error(errorMessages.DB_DOC_NOT_FOUND(req.params.id));
