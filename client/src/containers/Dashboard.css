@@ -1,0 +1,130 @@
+.Dashboard {
+    text-align: center;
+}
+  
+.Dashboard-header {
+    background-color: rgb(52, 53, 56);
+    height: 60px;
+    padding: 20px;
+    color: white;
+}
+
+.Header-user {
+    cursor: pointer;
+    float: right;
+    margin-right: -0.2%;
+    border-radius: 50%;
+    margin-top: 1px;
+    height: 45px;
+  }
+
+#Header-UsrMng-box {
+    float: right;
+    margin-top: 0.01%;
+    width: 245px;
+    height: 100px;
+    padding: 10px;
+    background: #960028;
+    border-radius: 5px;
+    color: white;  
+}
+
+.Header-UsrInfo {
+    text-align: left;
+    font-size: 15px;
+    margin-top: 6px;
+}
+
+.Header-Logout {
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: -10px;
+    color: white;
+}
+
+ul {
+    margin-top: -1% !important;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #960028;
+    color: white;    
+}
+
+@media (max-width: 1024px) {
+    .Header-user {
+        margin-top: 0.5%;
+    }
+    ul {
+        margin-top: -2% !important;
+    }
+}
+
+@media (max-width: 414px) {
+    #Header-UsrMng-box {
+        width: 180px;
+    }
+    .Header-user {
+        margin-top: -1%
+    }
+    ul {
+        margin-top: -2% !important;
+    }
+    li a {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 375px) {
+    .Header-user {
+        margin-top: -14%;
+        margin-right: -17px;
+    }
+    ul {
+        margin-top: -2% !important;
+    }
+    li a {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .Header-user {
+        margin-top: -13%;
+        margin-right: -10px;
+    }
+    ul {
+        margin-top: -2% !important;
+    }
+    li a {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .Header-user {
+        margin-top: -15%;
+        margin-right: -10px;
+    }
+    ul {
+        margin-top: -2% !important;
+    }
+    li a {
+        font-size: 8px;
+    }
+}

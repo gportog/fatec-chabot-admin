@@ -3,12 +3,15 @@ const express = require('express'),
     api = require('./api'),
     statusCode = require('./api/lib/httpStatusCodes'),
     bodyParser = require('body-parser'),
+    path = require('path');
     morgan = require('morgan');
 
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use('/api', api);
 
