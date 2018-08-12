@@ -1,0 +1,42 @@
+{
+  "name": "fatec-chabot-admin",
+  "version": "1.0.0",
+  "description": "Fatec's admin dashboard to check the feedback sent to the chatbot and answers improvement. ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gportog/fatec-chabot-admin.git"
+  },
+  "keywords": [
+    "fatec",
+    "chatbot",
+    "watson",
+    "conversation",
+    "toolchain",
+    "cloudant",
+    "box",
+    "storage",
+    "bootstrap",
+    "node.js",
+    "express"
+  ],
+  "author": "Gustavo Porto Guedes <gustavo.guedes@fatec.sp.gov.br>",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/gportog/fatec-chabot-admin/issues"
+  },
+  "homepage": "https://github.com/gportog/fatec-chabot-admin#readme",
+  "dependencies": {
+    "@cloudant/cloudant": "^2.3.0",
+    "body-parser": "^1.18.3",
+    "box-node-sdk": "^1.20.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.1"
+  }
+}

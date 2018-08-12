@@ -1,0 +1,13 @@
+PORT=8080
+
+CLOUDANT_USER=<Cloudant User>
+CLOUDANT_PW=<Cloudant Password>
+
+BOX_ROOT="<your-box-folder-name>"
+
+BOX_CLIENT_ID=<BOX Client id>
+BOX_CLIENT_SECRET=<BOX Client secret>
+BOX_PUBLIC_KEY_ID=<BOX Client public key id>
+BOX_PRIVATE_KEY=<BOX Client private key>
+BOX_PASSPHRASE=<BOX passphrase>
+BOX_ENTERPRISE_ID=<BOX enterprise id>
