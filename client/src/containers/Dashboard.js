@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
-import userImg from './userImg.png';
+import userImg from '../assets/userImg.png';
+import FeedbackGetAll from '../components/FeebackGetAll/FeedbackGetAll';
+import FeedbackService from '../services/Feedback';
+import AnswersService from '../services/Answers';
 import './Dashboard.css';
+import {
+    HashRouter,
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Switch,
+    Redirect
+} from "react-router-dom";
 
 class Dashboard extends Component {
     constructor() {
@@ -40,8 +51,12 @@ class Dashboard extends Component {
                     </ul>
                     <img src={userImg} className="Header-user" alt="User photo"
                         onClick={this.UserManagement.bind(this)} />
+                    {this.state.showUsrMng ? usrMng : null}
+
                 </header>
-                {this.state.showUsrMng ? usrMng : null}
+                <Switch>
+                    <Route path="/feedback" component={FeedbackGetAll} />
+                </Switch>
             </div>
         );
     }
