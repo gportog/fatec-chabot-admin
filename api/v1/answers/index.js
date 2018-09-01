@@ -15,7 +15,7 @@ answers.get('/file/:id', getEmbedLink);
 answers.put('/:id/:rev', upload.single('file'), updateAnswer);
 
 answers.use(function (err, req, res, next) {
-    res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+    res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR).json(err.message);
 });
 
 module.exports = answers;   
