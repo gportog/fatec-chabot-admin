@@ -1,5 +1,13 @@
 import React from "react";
 import './FeedbackGetAll.css';
+import {
+    HashRouter,
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Switch,
+    Redirect
+} from "react-router-dom";
 
 const $ = require('jquery');
 $.DataTable = require('datatables.net');
@@ -37,8 +45,8 @@ class FeedbackGetAllTable extends React.Component {
             return (
                 <tr key={index}>
                     <td>
-                        <a href={"/#/feedback/" + obj._id}
-                            className="glyphicon glyphicon-eye-open"></a>
+                        <Link to={{ pathname: "/feedback/" + obj._id, state: obj }} 
+                        className="glyphicon glyphicon-eye-open"/>
                     </td>
                     <td>{obj.user}</td>
                     <td>{obj.evaluation}</td>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import userImg from '../assets/userImg.png';
 import FeedbackGetAll from '../components/FeebackGetAll/FeedbackGetAll';
+import FeedbackGetOne from '../components/FeedbackGetOne/FeedbackGetOne';
 import AnswersGetAll from '../components/AnswersGetAll/AnswersGetAll';
 import FeedbackService from '../services/Feedback';
 import AnswersService from '../services/Answers';
@@ -56,6 +57,7 @@ class Dashboard extends Component {
 
                 </header>
                 <Switch>
+                    <Route path="/feedback/:id" component={FeedbackGetOne} />
                     <Route path="/feedback" component={FeedbackGetAll} />
                     <Route path="/respostas" component={AnswersGetAll} />
                 </Switch>
