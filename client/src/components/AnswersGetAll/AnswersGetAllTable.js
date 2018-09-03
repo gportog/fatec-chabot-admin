@@ -1,6 +1,14 @@
 import React from "react";
 import './AnswersGetAll.css';
 import AnswersService from '../../services/Answers';
+import {
+    HashRouter,
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Switch,
+    Redirect
+} from "react-router-dom";
 
 const $ = require('jquery');
 $.DataTable = require('datatables.net');
@@ -44,8 +52,8 @@ class AnswersGetAllTable extends React.Component {
             return (
                 <tr key={index}>
                     <td>
-                        <a href={"/#/respostas/" + obj._id}
-                            className="glyphicon glyphicon-pencil"></a>
+                        <Link to={{ pathname: "/respostas/" + obj._id, state: obj }}
+                            className="glyphicon glyphicon-pencil"/>
                     </td>
                     <td>{obj.intent}</td>
                     <td>{obj.entities.map((obj) => {

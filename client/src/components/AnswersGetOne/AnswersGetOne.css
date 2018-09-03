@@ -1,0 +1,31 @@
+h2 {
+    margin-top: 4%;
+    color: #960028;
+    padding: 10px;
+}
+
+.glyphicon-circle-arrow-left {
+    margin-top: 4%;
+    font-size: 50px;
+    color: #960028;
+    cursor: pointer;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    #submitAnswer {
+        margin-left: 2%;
+    }
+    #cancelSubmitAnswer {
+        margin-left: 2%;
+    }
+}
+
+@media (max-width: 768px) {
+    h2 {
+        margin-left: 4%;
+    } 
+    .glyphicon-circle-arrow-left {
+        font-size: 30px;
+    }
+}

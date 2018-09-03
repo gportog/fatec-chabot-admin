@@ -49,7 +49,21 @@ class AnswersService {
                 .then((error) => { return rej(error) })
         })
     }
-    
+
+    update(id, rev, answerObj) {
+        return new Promise((res, rej) => {
+            fetch(`/api/v1/answers/${id}/${rev}`, {
+                method: 'PUT',
+                body: answerObj
+            })
+                .then((response) => {
+                    if (response.ok) return res(response.json());
+                    return response.json();
+                })
+                .then((error) => { return rej(error) })
+        })
+    }
+
 }
 
 export default new AnswersService();

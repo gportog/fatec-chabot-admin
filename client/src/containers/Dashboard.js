@@ -3,8 +3,7 @@ import userImg from '../assets/userImg.png';
 import FeedbackGetAll from '../components/FeebackGetAll/FeedbackGetAll';
 import FeedbackGetOne from '../components/FeedbackGetOne/FeedbackGetOne';
 import AnswersGetAll from '../components/AnswersGetAll/AnswersGetAll';
-import FeedbackService from '../services/Feedback';
-import AnswersService from '../services/Answers';
+import AnswersGetOne from '../components/AnswersGetOne/AnswersGetOne';
 import './Dashboard.css';
 import {
     HashRouter,
@@ -59,7 +58,9 @@ class Dashboard extends Component {
                 <Switch>
                     <Route path="/feedback/:id" component={FeedbackGetOne} />
                     <Route path="/feedback" component={FeedbackGetAll} />
+                    <Route path="/respostas/:id" component={AnswersGetOne} />
                     <Route path="/respostas" component={AnswersGetAll} />
+                    <Route path="/" component={FeedbackGetAll} />
                 </Switch>
             </div>
         );

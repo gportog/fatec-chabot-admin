@@ -12,7 +12,7 @@ const updateAnswer = require('./updateAnswer');
 answers.get('/', getAll);
 answers.get('/:id', getOne);
 answers.get('/file/:id', getEmbedLink);
-answers.put('/:id/:rev', upload.single('file'), updateAnswer);
+answers.put('/:id/:rev', upload.single('answerFile'), updateAnswer);
 
 answers.use(function (err, req, res, next) {
     res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR).json(err.message);

@@ -11,11 +11,20 @@ module.exports = (req, res, next) => {
         err.status = httpStatus.BAD_REQUEST;
         return next(err)
     }
+    let entitiesEntry = [];
+    if (req.body.entity && req.body.entity.length > 0) {
+        for (let i = 0; i < req.body.entity.length; i++) {
+            entitiesEntry.push({
+                entity: req.body.entity[i],
+                value: req.body.value[i]
+            })
+        }
+    }
     let answerEntry = {
         _id: req.params.id,
         _rev: req.params.rev,
         intent: req.body.intent || '',
-        entities: req.body.entities || [],
+        entities: entitiesEntry,
         answer: req.body.answer,
         file: parseInt(req.body.file) || null
     }
