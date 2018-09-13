@@ -1,3 +1,7 @@
+module.exports.MISSING_FIELD_ERROR = function(field) {
+    return `Missing field "${field}"`;
+}
+
 module.exports.TYPE_MISMATCH_ERROR = function (parameter, expected, received) {
     return `Wrong type for parameter ${parameter}. Received ${received}, expected ${expected}`;
 }
@@ -8,6 +12,14 @@ module.exports.FILE_TYPE_MISMATCH_ERROR = function (expected, received) {
 
 module.exports.MULTER_CONFIG_TYPE_NOT_FOUND = (type) =>
     `The specified multer config type doesn't exists: ${type}`;
+
+module.exports.LIMIT_FILE_SIZE_ERROR = function(maximumSize) {
+    return `The uploaded file exceeds the maximum file size supported of ${maximumSize/1024/1024}MB.`;
+}
+
+module.exports.IO_ERROR = function(file) {
+    return `File read/write error when trying to access file ${file}`;
+}
 
 module.exports.BOX_FILE_NOT_FOUND = (id) =>
     `The file ${id} does not exists on the storage.`

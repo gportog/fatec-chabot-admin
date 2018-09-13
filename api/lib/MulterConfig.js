@@ -16,6 +16,21 @@ const configs = {
             fileSize: 10485760, // 10MB
             files: 1
         }
+    },
+    admins: {
+        fileFilter: (req, file, cb) => {
+            const allowedMimetypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!allowedMimetypes.includes(file.mimetype)){
+                let err = new Error(errorMessages.FILE_TYPE_MISMATCH_ERROR(allowedMimeTypes.join(', '), file.mimetype));
+                err.status = httpStatus.BAD_REQUEST;
+                return cb(err, false);
+            }
+            return cb(null, true);
+        },
+        limits: {
+            fileSize: 1048576, // 1MB
+            files: 1
+        }
     }
 };
 

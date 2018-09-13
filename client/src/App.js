@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Login from './components/Auth/Login';
+import Register from './components/Auth/Register';
+import ResetPassword from './components/Auth/ResetPassword';
 import Dashboard from './containers/Dashboard';
 import {
   HashRouter,
@@ -15,6 +18,9 @@ class App extends Component {
     return (
       <HashRouter>
         <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/registrar" component={Register} />
+          <Route path="/reset" component={ResetPassword} />
           <Route path="/" component={Dashboard} />
         </Switch>
       </HashRouter>

@@ -1,0 +1,52 @@
+.Auth {
+    text-align: center;
+}
+
+.Auth-header {
+    background-color: rgb(52, 53, 56);
+    height: 100px;
+    padding: 20px;
+    color: white;
+}
+
+#Auth-fatec {
+    cursor: pointer;
+    float: left;
+    height: 95px;
+    margin-top: -15px;
+}
+
+#Auth-title {
+    font-size: 25px;
+    float: right;
+    margin-top: 15px;
+}
+
+#Auth-title:hover {
+    padding: 5px;
+    border-style: dotted;
+    margin-top: 10px;
+}
+
+@media (max-width: 519px) {
+    .Auth-header {
+        height: 70px;
+    }
+    #Auth-fatec {
+        height: 61px;
+        margin-top: -10px;
+    }
+
+    #Auth-title {
+        font-size: 15px;
+        margin-top: 5px;
+    }
+
+}
+
+@media (max-width: 337px) {
+    #Auth-title {
+        font-size: 12px;
+        margin-top: 6px;
+    }
+}

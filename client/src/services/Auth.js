@@ -1,16 +1,44 @@
-class AnswersService {
-    get(id) {
+class AuthService {
+    authenticate(data) {
         return new Promise((res, rej) => {
-            fetch(`/api/v1/answers/${id}`, {
-                method: 'GET',
-                credentials: "same-origin",
+            fetch('/login', {
+                method: 'POST',
+                credentials: 'same-origin',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify(data)
             })
                 .then((response) => {
-                    if (response.status === 401) return rej('Unauthorized');
+                    if (response.ok) return res(response.json());
+                    return response.statusText;
+                })
+                .then((error) => { return rej(error) })
+        })
+    }
+
+    getUserPhoto(id, image_name) {
+        return new Promise((res, rej) => {
+            fetch(`/api/v1/admins/${id}/${image_name}`, {
+                method: 'GET',
+                credentials: 'same-origin'
+            })
+                .then((response) => {
+                    if (response.ok) return res (response.blob());
+                    return response.json();
+                })
+                .then((error) => { return rej(error) })
+        })
+    }
+
+    requestAcess(data) {
+        return new Promise((res, rej) => {
+            fetch('/api/v1/admins/', {
+                method: 'POST',
+                body: data
+            })
+                .then((response) => {
                     if (response.ok) return res(response.json());
                     return response.json();
                 })
@@ -18,53 +46,31 @@ class AnswersService {
         })
     }
 
-    getEmbed(id) {
+    resetPassword(data) {
         return new Promise((res, rej) => {
-            fetch(`/api/v1/answers/file/${id}`, {
-                method: 'GET',
-                credentials: "same-origin",
+            fetch('/api/v1/admins/reset', {
+                method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify(data)
             })
                 .then((response) => {
-                    if (response.status === 401) return rej('Unauthorized');
-                    if (response.ok) return res(response.json());
+                    if (response.ok) return res (response.json());
                     return response.json();
                 })
                 .then((error) => { return rej(error) })
         })
     }
 
-    getAll() {
+    logOut() {
         return new Promise((res, rej) => {
-            fetch('/api/v1/answers', {
-                method: 'GET',
-                credentials: "same-origin",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
+            fetch('/logout', {
+                method: 'POST',
+                credentials: 'same-origin'
             })
                 .then((response) => {
-                    if (response.status === 401) return rej('Unauthorized');
-                    if (response.ok) return res(response.json());
-                    return response.json();
-                })
-                .then((error) => { return rej(error) })
-        })
-    }
-
-    update(id, rev, answerObj) {
-        return new Promise((res, rej) => {
-            fetch(`/api/v1/answers/${id}/${rev}`, {
-                method: 'PUT',
-                credentials: "same-origin",
-                body: answerObj
-            })
-                .then((response) => {
-                    if (response.status === 401) return rej('Unauthorized');
                     if (response.ok) return res(response.json());
                     return response.json();
                 })
@@ -74,4 +80,4 @@ class AnswersService {
 
 }
 
-export default new AnswersService();
+export default new AuthService();

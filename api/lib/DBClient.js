@@ -1,4 +1,5 @@
 const Cloudant = require('@cloudant/cloudant');
+const fs = require('fs');
 
 const user = process.env.CLOUDANT_USER;
 const pw = process.env.CLOUDANT_PW;
@@ -44,6 +45,20 @@ DBClient.prototype.getById = function (id, options) {
     });
 }
 
+DBClient.prototype.getAttachment = function (id, imageName, options) {
+    validateDB(this, options)
+    const db = this._db || options.db;
+    return new Promise((res, rej) => {
+        if (typeof id !== 'string')
+            return rej(new Error(errorMessages.TYPE_MISMATCH_ERROR('id', 'string', typeof id)));
+        const database = this._client.db.use(db);
+        database.attachment.get(id, imageName, function (err, body) {
+            if (err) return rej(err);
+            return res(body);
+        });
+    });
+}
+
 DBClient.prototype.search = function (obj, options) {
     if (!obj || typeof obj !== 'object')
         throw new Error(errorMessages.TYPE_MISMATCH_ERROR('Search', 'object', typeof obj))
@@ -68,6 +83,8 @@ DBClient.prototype.search = function (obj, options) {
 }
 
 DBClient.prototype.insert = function (doc, options) {
+    if (typeof doc !== 'object')
+        throw new Error(errorMessages.TYPE_MISMATCH_ERROR('doc', 'object', typeof doc));
     validateDB(this, options)
     const db = this._db || options.db;
     return new Promise((res, rej) => {
@@ -83,8 +100,37 @@ DBClient.prototype.insert = function (doc, options) {
     });
 }
 
+DBClient.prototype.insertMultipart = function (doc, file, options) {
+    if (typeof doc !== 'object')
+        throw new Error(errorMessages.TYPE_MISMATCH_ERROR('doc', 'object', typeof doc));
+    if (typeof file !== 'object') 
+        throw new Error(errorMessages.TYPE_MISMATCH_ERROR('file', 'object', typeof file));
+    validateDB(this, options);
+    const db = this._db || options.db;
+    return new Promise((res, rej) => {
+        const database = this._client.db.use(db);
+        fs.readFile(file.path, (err, data) => {
+            if(err) return rej(err);
+            database.multipart.insert(doc, [{
+                name: file.filename,
+                data: data,
+                content_type: file.mimetype
+            }], doc.email, (err, body) => {
+                 if(err) return rej(err);
+                 if (body.ok) return res(body);
+                 else return rej(body);
+            });
+        });
+    });
+}
+
 DBClient.prototype.update = function (doc, options) {
     return this.insert(doc, options);
+}
+
+DBClient.prototype.updateMultipart = function (doc, file, options) {
+    if(!file) return this.insert(doc, options);
+    return this.insertMultipart(doc, file, options);
 }
 
 DBClient.prototype.delete = function (id, rev, options) {

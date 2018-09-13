@@ -1,4 +1,8 @@
 PORT=8080
+ENVIRONMENT=dev
+SESSION_SECRET=<SESSION_SECRET passphrase>
+CHATBOT_URL = <where your chatbot is running>
+ADMIN_URL = <where your admin dashboard is running>
 
 CLOUDANT_USER=<Cloudant User>
 CLOUDANT_PW=<Cloudant Password>
@@ -11,3 +15,7 @@ BOX_PUBLIC_KEY_ID=<BOX Client public key id>
 BOX_PRIVATE_KEY=<BOX Client private key>
 BOX_PASSPHRASE=<BOX passphrase>
 BOX_ENTERPRISE_ID=<BOX enterprise id>
+
+GMAIL_USER=<your gmail user>
+GMAIL_PW=<your gmail password>
+ADMINS_MAIL=<admin1@email.com, admin2@email.com>

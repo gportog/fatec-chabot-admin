@@ -23,6 +23,7 @@ class AnswersGetFile extends React.Component {
                 })
             })
             .catch((err) => {
+                if (err === 'Unauthorized') return window.location.href = '/#/login';
                 return this.setState({
                     gotError: true,
                     error: err,

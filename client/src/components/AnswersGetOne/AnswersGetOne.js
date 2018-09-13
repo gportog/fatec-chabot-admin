@@ -48,6 +48,7 @@ class AnswersGetOne extends React.Component {
                 })
             })
             .catch((err) => {
+                if (err === 'Unauthorized') return window.location.href = '/#/login';
                 return this.setState({
                     gotError: true,
                     error: err,
@@ -135,7 +136,10 @@ class AnswersGetOne extends React.Component {
                 alert('Resposta atualizada com sucesso');
                 return document.location.reload(true);
             })
-            .catch((err) => alert(err))
+            .catch((err) => {
+                if (err === 'Unauthorized') return window.location.href = '/#/login';
+                alert(err)
+            })
         event.preventDefault();
     }
 
