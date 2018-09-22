@@ -35,6 +35,10 @@
     margin-top: 6px;
 }
 
+#Header-UsrItem {
+    cursor: pointer;
+}
+
 .Header-Logout {
     cursor: pointer;
     font-size: 15px;

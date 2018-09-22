@@ -57,7 +57,7 @@ passport.use(new LocalStrategy(
                 if (result.docs[0].password !== password)
                     return done(null, false, {
                         message: 'Invalid password.'
-                        });
+                    });
                 return done(null, result.docs[0]);
             }
             return done(null, false, {
@@ -87,6 +87,7 @@ app.post('/login',
         res.cookie('_id', req.user._id);
         res.cookie('username', req.user.user.name);
         res.cookie('surname', req.user.user.surname);
+        res.cookie('master', req.user.master);
         res.cookie('photo', attachments[0]);
         return res.status(statusCode.OK)
             .json({ message: 'Login completed successfully' });
@@ -97,6 +98,7 @@ app.post('/logout', function (req, res) {
     res.cookie('_id', '');
     res.cookie('username', '');
     res.cookie('surname', '');
+    res.cookie('master', '');
     res.cookie('photo', '');
     req.logout();
     return res.status(statusCode.OK)
@@ -121,6 +123,8 @@ function AuthenticatedorNot(req, res, next) {
     res.cookie('_id', '');
     res.cookie('username', '');
     res.cookie('surname', '');
+    res.cookie('master', '');
+    res.cookie('photo', '');
     return res.status(statusCode.UNAUTHORIZED)
         .json({ message: 'You must log in to use the app' });
 }

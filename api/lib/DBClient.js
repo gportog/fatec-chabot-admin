@@ -111,8 +111,9 @@ DBClient.prototype.insertMultipart = function (doc, file, options) {
         const database = this._client.db.use(db);
         fs.readFile(file.path, (err, data) => {
             if(err) return rej(err);
+            if (Object.keys(doc).includes('_attachments')) delete doc._attachments;
             database.multipart.insert(doc, [{
-                name: file.filename,
+                name: file.originalname,
                 data: data,
                 content_type: file.mimetype
             }], doc.email, (err, body) => {

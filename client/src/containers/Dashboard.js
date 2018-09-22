@@ -4,6 +4,7 @@ import FeedbackGetAll from '../components/FeebackGetAll/FeedbackGetAll';
 import FeedbackGetOne from '../components/FeedbackGetOne/FeedbackGetOne';
 import AnswersGetAll from '../components/AnswersGetAll/AnswersGetAll';
 import AnswersGetOne from '../components/AnswersGetOne/AnswersGetOne';
+import UpdateAdmin from '../components/Auth/UpdateAdmin';
 import AuthService from '../services/Auth';
 import './Dashboard.css';
 import {
@@ -66,7 +67,9 @@ class Dashboard extends Component {
                     <p className="Header-UsrInfo">
                         {this.state.getCookie('username') + ' ' + this.state.getCookie('surname')}
                         <br></br>
-                        Gerenciar Perfil
+                        <span id="Header-UsrItem" onClick={() => {
+                            return window.location.href = '/#/admins/' + this.state.getCookie('_id')
+                            }}>Gerenciar Perfil</span>
                         <br></br><br></br>
                         <p className="Header-Logout" title="log out"
                         onClick={this.logOut.bind(this)}><b><span className="glyphicon glyphicon-log-out"></span> Log Out</b></p>
@@ -79,7 +82,7 @@ class Dashboard extends Component {
                     <ul>
                         <li><a href="/#/feedback">Feedback</a></li>
                         <li><a href="/#/respostas">Respostas</a></li>
-                        <li><a href="/#/admin">ADMIN</a></li>
+                        {this.state.getCookie('master') === 'true' ? <li><a href="/#/admin">ADMIN</a></li> : null}
                         <li><a href="https://fatec-chabot.mybluemix.net/#/" target="blank">Chatbot</a></li>
                     </ul>
                     <img src={userImg} id="User-Photo" className="Header-user" alt="User photo"
@@ -92,6 +95,7 @@ class Dashboard extends Component {
                     <Route path="/feedback" component={FeedbackGetAll} />
                     <Route path="/respostas/:id" component={AnswersGetOne} />
                     <Route path="/respostas" component={AnswersGetAll} />
+                    <Route path="/admins/:id" component={UpdateAdmin} />
                     <Route path="/" component={FeedbackGetAll} />
                 </Switch>
             </div>

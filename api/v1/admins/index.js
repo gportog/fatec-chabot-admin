@@ -5,13 +5,17 @@ const errorMessages = require('../../lib/errorMessages');
 const MulterConfig = require('../../lib/MulterConfig');
 const upload = new MulterConfig('admins');
 
+const getOne = require('./getOne');
 const getAdminPhoto = require('./getAdminPhoto');
-const createAdmin = require('./createAdmin');
 const resetPassword = require('./resetPassword');
+const createAdmin = require('./createAdmin');
+const updateAdmin = require('./updateAdmin');
 
-admins.get('/:id/:image_name', getAdminPhoto);
-admins.post('/', upload.single('adminPhoto'), createAdmin);
+admins.get('/:id', controlAccess, getOne);
+admins.get('/:id/:image_name', controlAccess, getAdminPhoto);
 admins.post('/reset', resetPassword);
+admins.post('/', upload.single('adminPhoto'), createAdmin);
+admins.put('/:id/:rev', controlAccess, upload.single('adminPhoto'), updateAdmin);
 
 admins.use(function (err, req, res, next) {
     if (err.code === 'LIMIT_FILE_SIZE') {
@@ -22,3 +26,10 @@ admins.use(function (err, req, res, next) {
 });
 
 module.exports = admins;   
+
+function controlAccess(req, res, next) {
+    if (req.user.master) return next();
+    if (req.user.active && req.user._id === req.params.id) return next();
+    return res.status(httpStatus.UNAUTHORIZED)
+        .json({ message: 'You are not allowed to perform this action' });
+}

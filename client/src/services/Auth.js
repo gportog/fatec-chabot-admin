@@ -18,6 +18,24 @@ class AuthService {
         })
     }
 
+    get(id) {
+        return new Promise((res, rej) => {
+            fetch(`/api/v1/admins/${id}`, {
+                method: 'GET',
+                credentials: "same-origin",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => {
+                    if (response.ok) return res(response.json());
+                    return response.json();
+                })
+                .then((error) => { return rej(error) })
+        })
+    }
+
     getUserPhoto(id, image_name) {
         return new Promise((res, rej) => {
             fetch(`/api/v1/admins/${id}/${image_name}`, {
@@ -26,6 +44,21 @@ class AuthService {
             })
                 .then((response) => {
                     if (response.ok) return res (response.blob());
+                    return response.json();
+                })
+                .then((error) => { return rej(error) })
+        })
+    }
+
+    updateAdmin(id, rev, data) {
+        return new Promise((res, rej) => {
+            fetch(`/api/v1/admins/${id}/${rev}`, {
+                method: 'PUT',
+                credentials: 'same-origin',
+                body: data
+            })
+                .then((response) => {
+                    if (response.ok) return res(response.json());
                     return response.json();
                 })
                 .then((error) => { return rej(error) })
