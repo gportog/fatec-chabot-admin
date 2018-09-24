@@ -5,6 +5,7 @@ import FeedbackGetOne from '../components/FeedbackGetOne/FeedbackGetOne';
 import AnswersGetAll from '../components/AnswersGetAll/AnswersGetAll';
 import AnswersGetOne from '../components/AnswersGetOne/AnswersGetOne';
 import UpdateAdmin from '../components/Auth/UpdateAdmin';
+import ManageAdmins from '../components/Auth/ManageAdmins';
 import AuthService from '../services/Auth';
 import './Dashboard.css';
 import {
@@ -82,7 +83,7 @@ class Dashboard extends Component {
                     <ul>
                         <li><a href="/#/feedback">Feedback</a></li>
                         <li><a href="/#/respostas">Respostas</a></li>
-                        {this.state.getCookie('master') === 'true' ? <li><a href="/#/admin">ADMIN</a></li> : null}
+                        {this.state.getCookie('master') === 'true' ? <li><a href="/#/admins">Admins</a></li> : null}
                         <li><a href="https://fatec-chabot.mybluemix.net/#/" target="blank">Chatbot</a></li>
                     </ul>
                     <img src={userImg} id="User-Photo" className="Header-user" alt="User photo"
@@ -96,6 +97,8 @@ class Dashboard extends Component {
                     <Route path="/respostas/:id" component={AnswersGetOne} />
                     <Route path="/respostas" component={AnswersGetAll} />
                     <Route path="/admins/:id" component={UpdateAdmin} />
+                    {this.state.getCookie('master') === 'true' ? 
+                    <Route path="/admins" component={ManageAdmins} /> : null}
                     <Route path="/" component={FeedbackGetAll} />
                 </Switch>
             </div>

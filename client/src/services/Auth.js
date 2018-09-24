@@ -29,6 +29,26 @@ class AuthService {
                 }
             })
                 .then((response) => {
+                    if (response.status === 401) return rej('Unauthorized');
+                    if (response.ok) return res(response.json());
+                    return response.json();
+                })
+                .then((error) => { return rej(error) })
+        })
+    }
+
+    getAll() {
+        return new Promise((res, rej) => {
+            fetch('/api/v1/admins/', {
+                method: 'GET',
+                credentials: "same-origin",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => {
+                    if (response.status === 401) return rej('Unauthorized');
                     if (response.ok) return res(response.json());
                     return response.json();
                 })
@@ -43,7 +63,7 @@ class AuthService {
                 credentials: 'same-origin'
             })
                 .then((response) => {
-                    if (response.ok) return res (response.blob());
+                    if (response.ok) return res(response.blob());
                     return response.json();
                 })
                 .then((error) => { return rej(error) })
@@ -58,6 +78,26 @@ class AuthService {
                 body: data
             })
                 .then((response) => {
+                    if (response.ok) return res(response.json());
+                    return response.json();
+                })
+                .then((error) => { return rej(error) })
+        })
+    }
+
+    activeAdmin(id, data) {
+        return new Promise((res, rej) => {
+            fetch(`/api/v1/admins/active/${id}`, {
+                method: 'PUT',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then((response) => {
+                    if (response.status === 401) return rej('Unauthorized');
                     if (response.ok) return res(response.json());
                     return response.json();
                 })
@@ -90,7 +130,7 @@ class AuthService {
                 body: JSON.stringify(data)
             })
                 .then((response) => {
-                    if (response.ok) return res (response.json());
+                    if (response.ok) return res(response.json());
                     return response.json();
                 })
                 .then((error) => { return rej(error) })
@@ -104,6 +144,21 @@ class AuthService {
                 credentials: 'same-origin'
             })
                 .then((response) => {
+                    if (response.ok) return res(response.json());
+                    return response.json();
+                })
+                .then((error) => { return rej(error) })
+        })
+    }
+
+    removeAdmin(id, rev) {
+        return new Promise((res, rej) => {
+            fetch(`/api/v1/admins/${id}/${rev}`, {
+                method: 'DELETE',
+                credentials: 'same-origin'
+            })
+                .then((response) => {
+                    if (response.status === 401) return rej('Unauthorized');
                     if (response.ok) return res(response.json());
                     return response.json();
                 })
